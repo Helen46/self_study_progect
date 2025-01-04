@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'courses',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -95,5 +96,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
 
 NULLABLE = {'blank': True, 'null': True}
