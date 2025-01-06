@@ -1,6 +1,7 @@
 from django.db import models
 
-from config.settings import NULLABLE
+from config.settings import NULLABLE, AUTH_USER_MODEL
+
 
 STATUS_OF_PASSAGE = [
         ('available', 'доступен'),
@@ -29,6 +30,12 @@ class Course(models.Model):
         choices=STATUS_OF_PASSAGE,
         verbose_name='Статус курса',
         default='available'
+    )
+    autor = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Автор курса',
+        **NULLABLE
     )
     class Meta:
         verbose_name = 'Курс'
@@ -74,6 +81,12 @@ class Lesson(models.Model):
         choices=STATUS_OF_PASSAGE,
         verbose_name='Статус урока',
         default='available'
+    )
+    autor = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Автор урока',
+        **NULLABLE
     )
     class Meta:
         verbose_name = 'Урок'

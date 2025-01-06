@@ -12,6 +12,18 @@ class User(AbstractUser):
         verbose_name="Электронная почта",
         help_text="Укажите вашу электронную почту"
     )
+    first_name = models.CharField(
+        max_length=50,
+        **NULLABLE,
+        verbose_name="Имя пользователя",
+        help_text="Укажите имя"
+    )
+    last_name = models.CharField(
+        max_length=150,
+        **NULLABLE,
+        verbose_name="Фамилия пользователя",
+        help_text="Укажите фамилию"
+    )
     phone = models.CharField(
         max_length=35,
         **NULLABLE,
