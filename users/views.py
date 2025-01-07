@@ -2,6 +2,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from users.models import User
+from users.permissions import IsAdmin, IsYourObject
 from users.serializers import UserSerializer
 
 
@@ -19,22 +20,22 @@ class UserCreateAPIView(CreateAPIView):
 class UserListApiView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdmin,)
 
 
 class UserRetrieveApiView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsYourObject,)
 
 
 class UserUpdateApiView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdmin | IsYourObject,)
 
 
 class UserDestroyApiView(DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdmin | IsYourObject,)

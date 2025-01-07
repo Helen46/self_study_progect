@@ -64,6 +64,12 @@ class Question(models.Model):
         verbose_name='Тест',
         help_text='Укажите для какого теста этот вопрос',
     )
+    autor = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Автор вопроса',
+        **NULLABLE
+    )
     class Meta:
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'
@@ -73,6 +79,9 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    """
+    Модель ответа
+    """
     body = models.TextField(
         verbose_name='Текст ответа',
         help_text='Введите текст ответа',
@@ -94,9 +103,15 @@ class Answer(models.Model):
         help_text='Отметьте, если ответ правильный',
         **NULLABLE
     )
+    autor = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Автор ответа',
+        **NULLABLE
+    )
     class Meta:
         verbose_name = 'Ответ'
-        verbose_name_plural = 'Ответ'
+        verbose_name_plural = 'Ответы'
 
     def __str__(self):
         return self.body

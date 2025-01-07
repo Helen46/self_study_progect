@@ -10,12 +10,12 @@ class TestAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'body')
+    list_display = ('id', 'autor', 'body' )
 
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'body')
+    list_display = ('id', 'autor', 'body' )
 
 
 @admin.register(UserAnswer)
