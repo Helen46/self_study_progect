@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from users.models import User
 from users.permissions import IsAdmin, IsYourObject
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserDetailSerializer
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -19,7 +19,7 @@ class UserCreateAPIView(CreateAPIView):
 
 class UserListApiView(ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserDetailSerializer
     permission_classes = (IsAdmin,)
 
 
