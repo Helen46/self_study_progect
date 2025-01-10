@@ -3,14 +3,6 @@ from django.db import models
 from config.settings import NULLABLE, AUTH_USER_MODEL
 
 
-STATUS_OF_PASSAGE = [
-        ('available', 'доступен'),
-        ('unavailable', 'недоступен'),
-        ('in progress', 'в процессе'),
-        ('passed', 'пройден')
-    ]
-
-
 class Course(models.Model):
     """
     Модель курса
@@ -24,12 +16,6 @@ class Course(models.Model):
         verbose_name='Описание курса',
         help_text='Добавьте описание курса',
         **NULLABLE
-    )
-    status = models.CharField(
-        max_length=16,
-        choices=STATUS_OF_PASSAGE,
-        verbose_name='Статус курса',
-        default='available'
     )
     autor = models.ForeignKey(
         AUTH_USER_MODEL,
@@ -75,12 +61,6 @@ class Lesson(models.Model):
         verbose_name='Изображение',
         help_text='Добавьте изображение',
         **NULLABLE
-    )
-    status = models.CharField(
-        max_length=16,
-        choices=STATUS_OF_PASSAGE,
-        verbose_name='Статус урока',
-        default='available'
     )
     autor = models.ForeignKey(
         AUTH_USER_MODEL,

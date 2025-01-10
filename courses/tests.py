@@ -47,7 +47,6 @@ class CourseTestCase(APITestCase):
             'id': self.course.id,
             'name': self.course.name,
             'description': self.course.description,
-            'status': self.course.status,
             'autor': self.user.id
             }
         ]
