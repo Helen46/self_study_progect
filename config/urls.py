@@ -24,7 +24,6 @@ urlpatterns = [
     path('courses/', include('courses.urls', namespace='courses')),
     path('users/', include('users.urls', namespace='users')),
     path('users_tests/', include('users_tests.urls', namespace='users_tests')),
-    path('test_sessions/',include('test_sessions.urls', namespace='test_sessions')),
 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')

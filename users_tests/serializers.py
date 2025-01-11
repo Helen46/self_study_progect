@@ -1,7 +1,7 @@
 from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
-from users_tests.models import Test, Question, Answer #, UserAnswer
+from users_tests.models import Test, Question, Answer
 
 
 class AnswerSerializer(ModelSerializer):
@@ -18,27 +18,34 @@ class AnswerDetailSerializer(ModelSerializer):
 class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question
-        fields = ('id', 'name', 'image', 'test')
+        fields = '__all__'
 
 
 class QuestionDetailSerializer(ModelSerializer):
-    answers = SerializerMethodField
+    answers = SerializerMethodField()
 
     def get_answers(self, obj):
-        return AnswerSerializer(obj.ouestion.all, many=True).data
+        answers = Answer.objects.filter(question=obj)
+        return [answer.name for answer in answers]
 
     class Meta:
         model = Question
-        fields = ('name', 'answers')
+        fields = ('id', 'name', 'answers',)
 
 
 class TestSerializer(ModelSerializer):
     class Meta:
         model = Test
-        fields = ('id', 'name', 'body')
+        fields = '__all__'
 
 
-# class UserAnswerSerializer(ModelSerializer):
-#     class Meta:
-#         model = UserAnswer
-#         fields = '__all__'
+class TestDetailSerializer(ModelSerializer):
+    questions = SerializerMethodField()
+
+    def get_questions(self, obj):
+        questions = Question.objects.filter(test=obj)
+        return [question.id for question in questions]
+
+    class Meta:
+        model = Test
+        fields = ('id', 'name', 'questions',)

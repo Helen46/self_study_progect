@@ -118,38 +118,3 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class UserAnswer(models.Model):
-#     """
-#     Модель ответа пользователя
-#     """
-#     body = models.CharField(
-#         max_length=300,
-#         verbose_name='Ответ пользователя'
-#     )
-#     user = models.ForeignKey(
-#         AUTH_USER_MODEL,
-#         on_delete=models.CASCADE,
-#         verbose_name='Пользователь',
-#         **NULLABLE
-#     )
-#     question = models.ForeignKey(
-#         Question,
-#         on_delete=models.CASCADE,
-#         verbose_name='На какой вопрос этот ответ'
-#     )
-#     attempt = models.IntegerField(
-#         default=0,
-#         verbose_name='Номер попытки'
-#     )
-#     is_correct = models.BooleanField(
-#         verbose_name='Правильность ответа',
-#         **NULLABLE
-#     )
-#     class Meta:
-#         verbose_name = 'Ответ пользователя'
-#         verbose_name_plural = 'Ответы пользователей'
-#
-#     def __str__(self):
-#         return self.body
