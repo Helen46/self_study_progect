@@ -60,10 +60,12 @@ class Question(models.Model):
         help_text='Добавьте изображение',
         **NULLABLE
     )
-    test = models.ManyToManyField(
+    test = models.ForeignKey(
         Test,
+        on_delete=models.CASCADE,
         verbose_name='Тест',
         help_text='Укажите для какого теста этот вопрос',
+        **NULLABLE
     )
     autor = models.ForeignKey(
         AUTH_USER_MODEL,

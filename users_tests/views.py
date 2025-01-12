@@ -102,4 +102,4 @@ class TestSessionAPIView(APIView):
             message = 'Ответ верный'
         else:
             message = 'Ответ не верный'
-        return Response({"message": message})
+        return Response({'message': message})

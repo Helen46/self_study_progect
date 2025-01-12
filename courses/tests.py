@@ -132,7 +132,6 @@ class LessonTestCase(APITestCase):
                 'image': None,
                 'lesson_content': self.lesson.lesson_content,
                 'name': self.lesson.name,
-                'status': self.lesson.status,
                 'video': None
             }
         ]

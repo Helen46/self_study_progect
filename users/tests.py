@@ -5,7 +5,7 @@ from rest_framework.test import APITestCase
 from users.models import User
 
 
-class CourseTestCase(APITestCase):
+class UserTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='super@gmail.com', is_staff=True, is_superuser=True,)
