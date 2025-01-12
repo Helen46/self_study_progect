@@ -1,7 +1,6 @@
-# from drf_yasg.openapi import Response
-# from rest_framework import status
-# from rest_framework.generics import get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
@@ -10,18 +9,6 @@ from users_tests.models import Test, Question, Answer
 from users_tests.serializers import TestSerializer, QuestionSerializer, AnswerSerializer, \
     QuestionDetailSerializer, AnswerDetailSerializer, TestDetailSerializer
 
-
-# class TestSessionAPIView(APIView):
-#   queryset = Question
-#   permission_classes = (IsAuthenticated,)
-#
-#     def post(self, request, pk):
-
-    #
-    #     body = Question.objects.filter(test__id=pk)
-    #     answers = UserAnswer(question=question, body=body)
-    #     user_answer.save()
-    #     return Response(status=status.HTTP_200_OK) #fron django.http import JsonResponse
 
 class TestViewSet(ModelViewSet):
     queryset = Test.objects.all()
@@ -99,3 +86,20 @@ class AnswerViewSet(ModelViewSet):
             self.serializer_class = AnswerDetailSerializer
 
         return super().get_serializer_class()
+
+
+class TestSessionAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        question_id = self.request.data.get('question')
+        question = get_object_or_404(Question, id=question_id)
+        correct_answer = Answer.objects.filter(question=question, is_correct=True).first().name
+        user_answer = self.request.data.get('user_answer')
+
+
+        if user_answer == correct_answer:
+            message = 'Ответ верный'
+        else:
+            message = 'Ответ не верный'
+        return Response({"message": message})
